@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quarterly Earnings – Interactive Report (RevealJS)</title>
+
+    <!-- Reveal.js core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css" />
+    <!-- Theme (feel free to change: beige, black, blood, league, moon, night, serif, simple, sky, solarized, white) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css" id="theme" />
+
+    <!-- Syntax highlight theme for code -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css" />
+
+    <style>
+      /* Custom tweaks */
+      .reveal { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      .brand { font-weight: 700; letter-spacing: .5px; }
+      .chart { width: 100%; height: 420px; margin: 1rem auto; }
+      .muted { opacity: .75; font-size: .7em; }
+      .kpi { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+      .kpi > div { border-radius: 14px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+      .good { border-left: 6px solid #2ecc71; }
+      .warn { border-left: 6px solid #f1c40f; }
+      .bad  { border-left: 6px solid #e74c3c; }
+      .email { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- Title slide (contains email) -->
+        <section data-auto-animate>
+          <h1 class="brand">Quarterly Earnings – Interactive Technical Report</h1>
+          <p>Technical Consultant · Major Financial Institution</p>
+          <p class="email">Contact: <strong>22f3001319@ds.study.iitm.ac.in</strong></p>
+          <p class="muted">Built with RevealJS · Press <kbd>?</kbd> for shortcuts · Press <kbd>S</kbd> for speaker notes</p>
+          <aside class="notes">
+            Welcome everyone. This deck is an interactive, web-native presentation using RevealJS. I will demo live code, math, fragments, and markdown-driven slides. Use arrow keys to navigate; press S for notes in presenter view.
+          </aside>
+        </section>
+
+        <!-- MARKDOWN SLIDE (require Markdown plugin) -->
+        <section data-markdown>
+          <textarea data-template>
+## Agenda (Markdown)
+
+- Business Highlights
+- Revenue & Margin Trends
+- Risk & Compliance
+- Outlook & Guidance
+- Q&A
+
+---
+
+### Headline KPIs (Markdown)
+
+- **Revenue:** $3.42B _(▲ 6.1% YoY)_
+- **Operating Margin:** 24.3%
+- **EPS (diluted):** $1.27
+- **Free Cash Flow:** $810M
+
+*Tip:* This entire slide is authored in Markdown.
+          </textarea>
+          <aside class="notes">Demonstrate that content authors can write slides in Markdown, which is easier for technical teams and version control.</aside>
+        </section>
+
+        <!-- Fragments / animated reveal -->
+        <section>
+          <h2>Highlights (Animated Fragments)</h2>
+          <ul>
+            <li class="fragment">Record **transaction volume** in Payments (+12% QoQ)</li>
+            <li class="fragment">Lower **credit loss provisioning** (−35 bps)</li>
+            <li class="fragment fade-up">Cloud **infrastructure migration** 80% complete</li>
+            <li class="fragment fade-in-then-semi-out">Launched **AI-driven risk scoring** pilot</li>
+          </ul>
+          <aside class="notes">Pause after each bullet to elaborate. Fragments demonstrate stepwise storytelling.</aside>
+        </section>
+
+        <!-- Code sample with syntax highlighting & line focus -->
+        <section>
+          <h2>Code Sample: KPI Parser</h2>
+          <pre><code class="language-python" data-line-numbers="1-2|4,6-9|12">
+import json
+from statistics import fmean
+
+# Load quarterly revenue from a JSON API response
+with open('data/earnings.json') as f:
+    obj = json.load(f)
+revenue = [q['revenue_usd_m'] for q in obj['quarters']]
+margin  = [q['op_margin_pct'] for q in obj['quarters']]
+
+# Simple derived metrics
+rev_growth = (revenue[-1] - revenue[-5]) / revenue[-5]
+pc_margin  = fmean(margin)
+print(f"TTM growth={rev_growth:.2%}, Avg margin={pc_margin:.1f}%")
+          </code></pre>
+          <aside class="notes">Line highlighting draws attention to the key logic. Output is illustrative; in a live demo we could fetch data client-side.</aside>
+        </section>
+
+        <!-- Financial math (MathJax via RevealMath plugin) -->
+        <section>
+          <h2>Financial Math</h2>
+          <p>Net Present Value (discrete cash flows):</p>
+          <p>\[ \mathrm{NPV} = \sum_{t=1}^{T} \frac{CF_t}{(1+r)^t} - C_0 \]</p>
+          <p>Dividend Discount (Gordon Growth):</p>
+          <p>\[ P_0 = \frac{D_1}{r-g} \quad \text{where } r>g \]</p>
+          <aside class="notes">Discuss discount rate sensitivity and relation to WACC and risk-free rate plus equity risk premium.</aside>
+        </section>
+
+        <!-- Speaker notes example on a slide -->
+        <section>
+          <h2>Risk & Compliance</h2>
+          <div class="kpi">
+            <div class="good"><strong>Operational Incidents</strong><br/>2 (↓)</div>
+            <div class="warn"><strong>Audit Findings</strong><br/>3 minor</div>
+            <div class="bad"><strong>Fraud Attempts Blocked</strong><br/>+18% QoQ</div>
+          </div>
+          <aside class="notes">Call out incident root-cause remediation and mention ongoing regulatory changes impacting KYC/AML reporting.</aside>
+        </section>
+
+        <!-- Live demo placeholder (optional lazy iframe) -->
+        <section>
+          <h2>Live Demo Placeholder</h2>
+          <p class="muted">This iframe is lazy-loaded to keep the deck fast:</p>
+          <iframe data-src="https://example.com" data-preload style="width:100%;height:400px;border:0;border-radius:12px;"></iframe>
+          <aside class="notes">Replace with an internal dashboard URL for stakeholder walkthroughs.</aside>
+        </section>
+
+        <!-- Closing / contact -->
+        <section>
+          <h2>Thank You</h2>
+          <p>Questions? Reach out at <span class="email">22f3001319@ds.study.iitm.ac.in</span></p>
+          <p class="muted">Open Presenter View with <kbd>S</kbd>. Overview with <kbd>O</kbd>. Fullscreen with <kbd>F</kbd>.</p>
+          <aside class="notes">Invite questions and next steps, mention that slides are hosted on GitHub Pages.</aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Reveal.js core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <!-- Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
+
+    <script>
+      // Initialize the deck
+      Reveal.initialize({
+        hash: true, // deep-linkable URLs
+        width: 1280,
+        height: 720,
+        margin: 0.06,
+        controls: true,
+        progress: true,
+        history: true,
+        transition: 'slide',
+        plugins: [ RevealMarkdown, RevealHighlight, RevealMath, RevealNotes ],
+        // Math plugin config (MathJax v3)
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+          tex: { inlineMath: [['$','$'], ['\\(','\\)']] }
+        }
+      });
+    </script>
+  </body>
+</html>
